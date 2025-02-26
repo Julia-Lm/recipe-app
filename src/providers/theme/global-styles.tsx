@@ -52,6 +52,8 @@ export const GlobalCSSStyle = createGlobalStyle`
     html {
         background-color: ${({ theme }) => theme.bodyBackground};
         overscroll-behavior-y: contain;
+        font-size: 16px;
+        color: ${({ theme }) => theme.text};
     }
 
     body {

@@ -6,20 +6,27 @@ import { Loader } from "entities/loader";
 import { ErrorBoundaryComponent } from "providers/global-providers/error-boundary";
 import { useNavigate } from "react-router-dom";
 import { ROUTES } from "routes/routes.constant.ts";
+import { FilterRecipePanel } from "pages/recipe-home/ui";
+import { useMemo, useState } from "react";
 
 export const RecipeHome = observer(() => {
-  const { recipes, isLoading } = RecipeHub;
-  console.log("recipes", recipes);
+  const { recipes, isLoading, searchMeals } = RecipeHub;
+  const [category, setCategory] = useState<string>("");
 
   const navigate = useNavigate();
   const goToRecipeDetails = (recipeId: string) => {
     navigate(`${ROUTES.recipeDetails.key}/${recipeId}`);
   };
 
+  const filterRecipes = useMemo(() => {
+    return category ? recipes?.filter((recipe) => recipe.strCategory === category) : recipes;
+  }, [category, recipes]);
+
   return (
     <ErrorBoundaryComponent>
+      <FilterRecipePanel searchMeals={searchMeals} category={category} setCategory={setCategory} />
       <S.RecipeList>
-        {recipes?.map(({ idMeal, strCategory, strMeal, strMealThumb, strArea }) => (
+        {filterRecipes?.map(({ idMeal, strCategory, strMeal, strMealThumb, strArea }) => (
           <RecipeCard
             key={idMeal}
             name={strMeal}

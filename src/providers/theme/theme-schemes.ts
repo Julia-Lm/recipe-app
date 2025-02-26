@@ -2,6 +2,7 @@ import { colorShades } from "./color-shades.ts";
 
 export const mainTheme = {
   bodyBackground: colorShades.white,
+  text: colorShades.black,
   header: {
     border: colorShades.green,
     link: {
@@ -27,6 +28,16 @@ export const mainTheme = {
       backgroundColor: colorShades.green,
       color: colorShades.white,
     },
+  },
+  input: {
+    label: colorShades.black,
+    background: colorShades.white,
+    border: colorShades.black,
+    color: colorShades.black,
+    disabledBackground: colorShades.white,
+    disabledBorder: colorShades.black,
+    disabledText: colorShades.black,
+    error: colorShades.red,
   },
 };
 

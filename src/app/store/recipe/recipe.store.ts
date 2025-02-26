@@ -6,6 +6,7 @@ import { transformMealData } from "app/store/recipe/recipe.utils.ts";
 class RecipeStore {
   private meals: MealData[] | null;
   private backURL: string;
+  private searchQuery: string;
   public isLoading: boolean;
   public isDataReady: boolean;
 
@@ -13,6 +14,7 @@ class RecipeStore {
     makeAutoObservable(this, undefined, { autoBind: true });
     this.backURL = "https://www.themealdb.com/api/json/v1/1/";
 
+    this.searchQuery = "";
     this.meals = null;
     this.isLoading = false;
     this.isDataReady = false;
@@ -27,16 +29,20 @@ class RecipeStore {
     return this.meals;
   }
 
+  searchMeals(searchQuery?: string) {
+    this.searchQuery = searchQuery || "";
+    this.getMeals(this.searchQuery);
+  }
+
   setMealsData(meals: Meal[]) {
     this.meals = meals.map((meal) => transformMealData(meal));
   }
 
-  async getMeals() {
+  async getMeals(name?: string) {
     try {
       this.isLoading = true;
 
-      const { data } = await this.getMealByNameRequest<Meal>();
-      console.log(data);
+      const { data } = await this.getMealByNameRequest<Meal>(name);
 
       if (data) {
         this.setMealsData(data.meals);

@@ -7,6 +7,7 @@ import { useMemo } from "react";
 import { ErrorBoundaryComponent } from "providers/global-providers/error-boundary.tsx";
 import { CategoryBadge, FlagImg } from "shared/ui-elements";
 import { CountryCodes } from "app/store/recipe/recipe.type.ts";
+import { ROUTES } from "routes/routes.constant.ts";
 
 export const RecipeDetails = observer(() => {
   const { recipeId } = useParams();
@@ -16,6 +17,7 @@ export const RecipeDetails = observer(() => {
 
   return (
     <ErrorBoundaryComponent>
+      <S.BackLink to={ROUTES.home.url}>Back to home page</S.BackLink>
       <S.Container>
         {recipeData ? (
           <>

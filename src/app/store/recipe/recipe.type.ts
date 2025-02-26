@@ -76,3 +76,16 @@ export const CountryCodes: Record<string, string> = {
   Norwegian: "no",
   Filipino: "ph",
 };
+
+export const CategoryName = [
+  "Chicken",
+  "Beef",
+  "Vegetarian",
+  "Side",
+  "Seafood",
+  "Pork",
+  "Miscellaneous",
+  "Pasta",
+  "Dessert",
+  "Lamb",
+];

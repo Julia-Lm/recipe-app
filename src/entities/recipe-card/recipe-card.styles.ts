@@ -3,6 +3,7 @@ import styled from "styled-components";
 export const CardWrapper = styled.div`
   display: flex;
   flex-direction: column;
+  align-self: flex-start;
   background: ${({ theme }) => theme.recipeCard.backgroundColor};
   width: 100%;
   min-height: 325px;
@@ -37,5 +38,5 @@ export const CardImg = styled.img`
   height: 100%;
   max-height: 255px;
   object-fit: cover;
+  object-position: center;
 `;
-

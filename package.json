@@ -19,20 +19,22 @@
     "@rollup/plugin-url": "^8.0.2",
     "@simplewebauthn/browser": "^13.1.0",
     "@svgr/rollup": "^8.1.0",
+    "lodash.debounce": "^4.0.8",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-easy-crop": "^5.1.0"
   },
   "devDependencies": {
-    "@swc/core": "^1.6.3",
-    "@types/react": "^18.2.66",
-    "@types/react-dom": "^18.2.22",
-    "@typescript-eslint/eslint-plugin": "^7.2.0",
-    "@typescript-eslint/parser": "^7.2.0",
-    "@vitejs/plugin-react": "^4.2.1",
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.0",
     "@mui/material": "^6.4.5",
+    "@swc/core": "^1.6.3",
+    "@types/react": "^18.2.66",
+    "@types/react-dom": "^18.2.22",
+    "@types/styled-components": "^5.1.26",
+    "@typescript-eslint/eslint-plugin": "^7.2.0",
+    "@typescript-eslint/parser": "^7.2.0",
+    "@vitejs/plugin-react": "^4.2.1",
     "axios": "^1.7.2",
     "eslint": "^8.57.0",
     "eslint-plugin-react-hooks": "^4.6.0",
@@ -46,11 +48,10 @@
     "react-error-boundary": "^4.0.13",
     "react-helmet-async": "^2.0.5",
     "react-router-dom": "^6.26.0",
+    "styled-components": "^5.3.9",
     "typescript": "^5.2.2",
     "unplugin-swc": "^1.4.5",
     "vite": "^5.2.0",
-    "yup": "^1.4.0",
-    "styled-components": "^5.3.9",
-    "@types/styled-components": "^5.1.26"
+    "yup": "^1.4.0"
   }
 }
