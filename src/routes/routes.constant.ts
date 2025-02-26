@@ -6,7 +6,7 @@ export enum ROUTES_KEYS {
 
 export const ROUTES = {
   basePath: "/",
-  recipes: {
+  home: {
     key: ROUTES_KEYS.home,
     url: ROUTES_KEYS.home,
   },

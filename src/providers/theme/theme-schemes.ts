@@ -1,19 +1,29 @@
 import { colorShades } from "./color-shades.ts";
-import { ThemesName } from "providers/theme/theme.types.ts";
 
-export const lightTheme = {
+export const mainTheme = {
   bodyBackground: colorShades.white,
+  header: {
+    border: colorShades.green,
+    link: {
+      color: colorShades.green,
+    },
+  },
+  recipeCard: {
+    backgroundColor: colorShades.lightBeige,
+    category: {
+      backgroundColor: colorShades.white,
+      color: colorShades.green
+    }
+  },
+  spinner: {
+    border: colorShades.lightGrey,
+    backgroundColor: colorShades.green,
+  },
+  loader: {
+    backgroundColor: colorShades.lightWhite,
+  }
 };
 
-export const darkTheme = {
-  bodyBackground: colorShades.obsidian,
-};
-
-type ThemeType = typeof lightTheme;
-
-export const ThemesSchemes = {
-  [ThemesName.light]: lightTheme,
-  [ThemesName.dark]: darkTheme,
-};
+type ThemeType = typeof mainTheme;
 
 export interface AppTheme extends ThemeType {}

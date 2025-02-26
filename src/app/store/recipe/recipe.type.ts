@@ -47,3 +47,33 @@ export interface StrMeasure {
 export interface MealsResponse<T> {
   meals: T[];
 }
+
+
+export const CountryCodes: Record<string, string> = {
+  Moroccan: "ma",
+  American: "us",
+  British: "gb",
+  Canadian: "ca",
+  Chinese: "cn",
+  Croatian: "hr",
+  Dutch: "nl",
+  Egyptian: "eg",
+  French: "fr",
+  Greek: "gr",
+  Indian: "in",
+  Irish: "ie",
+  Italian: "it",
+  Jamaican: "jm",
+  Japanese: "jp",
+  Kenyan: "ke",
+  Malaysian: "my",
+  Mexican: "mx",
+  Russian: "ru",
+  Spanish: "es",
+  Thai: "th",
+  Tunisian: "tn",
+  Turkish: "tr",
+  Vietnamese: "vn",
+  Norwegian: "no",
+  Filipino: "ph"
+};
