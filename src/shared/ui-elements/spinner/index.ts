@@ -1,1 +1,1 @@
-export * from "./Spinner.component.tsx";
+export * from "./spinner.component";

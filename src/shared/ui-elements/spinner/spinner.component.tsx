@@ -1,3 +1,3 @@
-import * as S from "./Spinner.styles.ts";
+import * as S from "./spinner.styles";
 
 export const Spinner = () => <S.SpinnerContainer />;
