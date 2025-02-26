@@ -10,10 +10,6 @@ export const mainTheme = {
   },
   recipeCard: {
     backgroundColor: colorShades.lightBeige,
-    category: {
-      backgroundColor: colorShades.white,
-      color: colorShades.green
-    }
   },
   spinner: {
     border: colorShades.lightGrey,
@@ -21,7 +17,17 @@ export const mainTheme = {
   },
   loader: {
     backgroundColor: colorShades.lightWhite,
-  }
+  },
+  categoryBadge: {
+    light: {
+      backgroundColor: colorShades.white,
+      color: colorShades.green,
+    },
+    dark: {
+      backgroundColor: colorShades.green,
+      color: colorShades.white,
+    },
+  },
 };
 
 type ThemeType = typeof mainTheme;

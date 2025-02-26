@@ -1,4 +1,3 @@
-
 export const colorShades = {
   void: "transparent",
   white: "#fff",

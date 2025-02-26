@@ -48,7 +48,6 @@ export interface MealsResponse<T> {
   meals: T[];
 }
 
-
 export const CountryCodes: Record<string, string> = {
   Moroccan: "ma",
   American: "us",
@@ -75,5 +74,5 @@ export const CountryCodes: Record<string, string> = {
   Turkish: "tr",
   Vietnamese: "vn",
   Norwegian: "no",
-  Filipino: "ph"
+  Filipino: "ph",
 };
