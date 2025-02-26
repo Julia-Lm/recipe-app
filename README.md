@@ -1,6 +1,10 @@
 # Recipe App
-
 ## React.js + TypeScript + Vite
+
+Link to the app:
+
+[recipe-app-silk-phi.vercel.app](https://recipe-app-silk-phi.vercel.app/)
+
 
 ## Installation
 
