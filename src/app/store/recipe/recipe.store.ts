@@ -1,7 +1,9 @@
 import { makeAutoObservable } from "mobx";
-import { MealsResponse, Meal, MealData } from "app/store/recipe/recipe.type";
+import {MealsResponse, Meal, MealData, GetMealDetailsRequest} from "app/store/recipe/recipe.type";
 import axios from "axios";
 import { transformMealData } from "app/store/recipe/recipe.utils.ts";
+import {RecipeDetailsStore} from "app/store/recipe/recipe-details.store.ts";
+
 
 class RecipeStore {
   private meals: MealData[] | null;
@@ -38,6 +40,13 @@ class RecipeStore {
     this.meals = meals.map((meal) => transformMealData(meal));
   }
 
+  getMealDetailsById(params?: GetMealDetailsRequest) {
+    return new RecipeDetailsStore(
+        this.getMealDetailsByIdRequest,
+        params,
+    );
+  }
+
   async getMeals(name?: string) {
     try {
       this.isLoading = true;
@@ -57,6 +66,11 @@ class RecipeStore {
 
   async getMealByNameRequest<T>(name?: string) {
     const url = `${this.backURL}/search.php?s=${name || ""}`;
+    return await axios.get<MealsResponse<T>>(url);
+  }
+
+  async getMealDetailsByIdRequest<T>({mealId}: GetMealDetailsRequest) {
+    const url = `${this.backURL}/lookup.php?i=${mealId}`;
     return await axios.get<MealsResponse<T>>(url);
   }
 }

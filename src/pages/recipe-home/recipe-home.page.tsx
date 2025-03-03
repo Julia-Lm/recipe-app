@@ -4,18 +4,21 @@ import { RecipeCard } from "entities/recipe-card";
 import * as S from "./recipe-home.styles";
 import { Loader } from "entities/loader";
 import { ErrorBoundaryComponent } from "providers/global-providers/error-boundary";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { ROUTES } from "routes/routes.constant.ts";
 import { FilterRecipePanel } from "pages/recipe-home/ui";
 import { useMemo, useState } from "react";
 
 export const RecipeHome = observer(() => {
+  const [searchParams] = useSearchParams();
   const { recipes, isLoading, searchMeals } = RecipeHub;
-  const [category, setCategory] = useState<string>("");
+  const [category, setCategory] = useState<string>(searchParams.get("category") || "");
 
   const navigate = useNavigate();
   const goToRecipeDetails = (recipeId: string) => {
-    navigate(`${ROUTES.recipeDetails.key}/${recipeId}`);
+    navigate(`${ROUTES.recipeDetails.key}/${recipeId}`, {
+      state: { searchQuery: searchParams.get("searchQuery"), category: searchParams.get("category") || "" },
+    });
   };
 
   const filterRecipes = useMemo(() => {

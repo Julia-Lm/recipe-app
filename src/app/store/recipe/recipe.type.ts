@@ -89,3 +89,7 @@ export const CategoryName = [
   "Dessert",
   "Lamb",
 ];
+
+export interface GetMealDetailsRequest {
+  mealId: string;
+}
