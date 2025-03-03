@@ -4,11 +4,11 @@ import * as S from "./filter-recipe-panel.styles.ts";
 import { Select, TextField, MenuItem, SelectChangeEvent } from "@mui/material";
 import debounce from "lodash.debounce";
 import { ChangeEvent, useCallback, useState } from "react";
-import { CategoryName } from "app/store/recipe/recipe.type.ts";
 
-export const FilterRecipePanel = ({ searchMeals, category, setCategory }: FilterRecipePanelProp) => {
+export const FilterRecipePanel = ({ searchMeals, setPage, categoryNames }: FilterRecipePanelProp) => {
   const [searchParams, setSearchParams] = useSearchParams();
-  const [searchQuery, setSearchQuery] = useState(searchParams.get("searchQuery") || "");
+  const [searchQuery, setSearchQuery] = useState<string>(searchParams.get("searchQuery") || "");
+  const [category, setCategory] = useState<string>(searchParams.get("category") || "");
 
   const debouncedUpdateParams = useCallback(
     debounce((newFilters) => {
@@ -20,13 +20,30 @@ export const FilterRecipePanel = ({ searchMeals, category, setCategory }: Filter
   const handleChangeSearchQuery = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const newSearchQuery = e.target.value;
     setSearchQuery(newSearchQuery);
-    setSearchParams(newSearchQuery ? { searchQuery: newSearchQuery } : {});
+    updateSearchParams("searchQuery", newSearchQuery);
+    setPage(1);
     debouncedUpdateParams(newSearchQuery);
   };
 
-  const handleChangeCategory = (e: SelectChangeEvent<string>) => {
+  const handleChangeCategory = (e: SelectChangeEvent) => {
     const newCategory = e.target.value;
+    setPage(1);
+    updateSearchParams("category", newCategory);
     setCategory(newCategory);
+  };
+
+  const updateSearchParams = (key: string, value: string | undefined) => {
+    setSearchParams((prevParams) => {
+      const updatedParams = new URLSearchParams(prevParams);
+
+      if (value) {
+        updatedParams.set(key, value);
+      } else {
+        updatedParams.delete(key);
+      }
+
+      return updatedParams;
+    });
   };
 
   return (
@@ -40,9 +57,20 @@ export const FilterRecipePanel = ({ searchMeals, category, setCategory }: Filter
         size="small"
       />
 
-      <Select value={category} onChange={handleChangeCategory} displayEmpty variant="outlined" size="small">
+      <Select
+        value={category}
+        onChange={handleChangeCategory}
+        displayEmpty
+        variant="outlined"
+        size="small"
+        MenuProps={{
+          style: {
+            maxHeight: "350px",
+          },
+        }}
+      >
         <MenuItem value="">All Categories</MenuItem>
-        {CategoryName.map((category) => (
+        {categoryNames.map((category) => (
           <MenuItem value={category} key={category}>
             {category}
           </MenuItem>

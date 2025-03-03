@@ -75,21 +75,22 @@ export const CountryCodes: Record<string, string> = {
   Vietnamese: "vn",
   Norwegian: "no",
   Filipino: "ph",
+  Ukrainian: "ua",
+  Polish: "pl",
+  Portuguese: "pt",
 };
-
-export const CategoryName = [
-  "Chicken",
-  "Beef",
-  "Vegetarian",
-  "Side",
-  "Seafood",
-  "Pork",
-  "Miscellaneous",
-  "Pasta",
-  "Dessert",
-  "Lamb",
-];
 
 export interface GetMealDetailsRequest {
   mealId: string;
+}
+
+export interface MealCategoriesResponse<T> {
+  categories: T[];
+}
+
+export interface MealCategoriesData {
+  idCategory: string;
+  strCategory: string;
+  strCategoryDescription: string;
+  strCategoryThumb: string;
 }

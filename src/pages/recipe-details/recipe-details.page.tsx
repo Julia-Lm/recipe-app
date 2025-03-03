@@ -15,14 +15,14 @@ export const RecipeDetails = observer(() => {
 
   const { getMealDetailsById } = RecipeHub;
 
-    const MerchantDetailsStore = useMemo(() => {
-        const store = getMealDetailsById();
-        store.setDetailsId(recipeId);
-        store.getMeals();
-        return store;
-    }, []);
+  const MerchantDetailsStore = useMemo(() => {
+    const store = getMealDetailsById();
+    store.setDetailsId(recipeId);
+    store.getMeals();
+    return store;
+  }, []);
 
-    const { recipeDetails, isLoading } = MerchantDetailsStore;
+  const { recipeDetails, isLoading } = MerchantDetailsStore;
 
   return (
     <ErrorBoundaryComponent>
@@ -34,30 +34,31 @@ export const RecipeDetails = observer(() => {
       <S.Container>
         {recipeDetails ? (
           <>
-            <S.RecipeImg src={recipeDetails.strMealThumb} alt={recipeDetails.strMeal} />
             <S.Wrapper>
-              <S.Title>{recipeDetails.strMeal}</S.Title>
-              <S.RecipeDetails>
-                <CategoryBadge type="dark">{recipeDetails.strCategory}</CategoryBadge>
-                <FlagImg
-                  src={`https://flagcdn.com/w320/${CountryCodes[recipeDetails.strArea]}.png`}
-                  alt={recipeDetails.strArea}
-                />
-              </S.RecipeDetails>
+              <S.RecipeImg src={recipeDetails.strMealThumb} alt={recipeDetails.strMeal} />
+              <S.DescriptionWrapper>
+                <S.Title>{recipeDetails.strMeal}</S.Title>
+                <S.RecipeDetails>
+                  <CategoryBadge type="dark">{recipeDetails.strCategory}</CategoryBadge>
+                  <FlagImg
+                    src={`https://flagcdn.com/w320/${CountryCodes[recipeDetails.strArea]}.png`}
+                    alt={recipeDetails.strArea}
+                  />
+                </S.RecipeDetails>
+                <div>
+                  <S.Subtitle>Ingredients</S.Subtitle>
 
-              <div>
-                <S.Subtitle>Ingredients</S.Subtitle>
-
-                {recipeDetails.ingredients.map(({ ingredient, measure }) => (
-                  <div key={ingredient}>{`${ingredient} - ${measure}`}</div>
-                ))}
-              </div>
-
-              <div>
-                <S.Subtitle>Instruction</S.Subtitle>
-                <S.InstructionDescription>{recipeDetails.strInstructions}</S.InstructionDescription>
-              </div>
+                  {recipeDetails.ingredients.map(({ ingredient, measure }) => (
+                    <div key={ingredient}>{`${ingredient} - ${measure}`}</div>
+                  ))}
+                </div>
+              </S.DescriptionWrapper>
             </S.Wrapper>
+
+            <div>
+              <S.Subtitle>Instruction</S.Subtitle>
+              <S.InstructionDescription>{recipeDetails.strInstructions}</S.InstructionDescription>
+            </div>
           </>
         ) : (
           <S.NoData>No data</S.NoData>

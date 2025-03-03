@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const CardWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  align-self: flex-start;
+  justify-content: space-around;
   background: ${({ theme }) => theme.recipeCard.backgroundColor};
   width: 100%;
   min-height: 325px;
@@ -30,6 +30,10 @@ export const CardContentDetails = styled.div`
 export const CardTitle = styled.p`
   font-weight: 600;
   font-size: 1.25rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
 `;
 
 export const CardImg = styled.img`
@@ -39,4 +43,5 @@ export const CardImg = styled.img`
   max-height: 255px;
   object-fit: cover;
   object-position: center;
+  margin-bottom: auto;
 `;

@@ -1,12 +1,12 @@
 import { makeAutoObservable } from "mobx";
-import {MealsResponse, Meal, GetMealDetailsRequest, MealData} from "app/store/recipe/recipe.type";
-import {AxiosResponse} from "axios";
+import { MealsResponse, Meal, GetMealDetailsRequest, MealData } from "app/store/recipe/recipe.type";
+import { AxiosResponse } from "axios";
 import { transformMealData } from "app/store/recipe/recipe.utils.ts";
 
 export type RecipeDetailsFetchMethod<T> = (params: GetMealDetailsRequest) => Promise<
-    AxiosResponse<MealsResponse<T>, any> & {
-  message?: string | undefined;
-}
+  AxiosResponse<MealsResponse<T>, any> & {
+    message?: string | undefined;
+  }
 >;
 
 export class RecipeDetailsStore<T extends Meal> {
@@ -52,7 +52,7 @@ export class RecipeDetailsStore<T extends Meal> {
 
       if (!detailsId) return;
 
-      const { data } = await this.recipeDetailsRequest({mealId: detailsId});
+      const { data } = await this.recipeDetailsRequest({ mealId: detailsId });
 
       if (data) {
         this.setMealsData(data.meals);
@@ -65,4 +65,3 @@ export class RecipeDetailsStore<T extends Meal> {
     }
   }
 }
-

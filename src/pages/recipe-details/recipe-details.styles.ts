@@ -3,17 +3,24 @@ import { Link } from "react-router-dom";
 
 export const Container = styled.div`
   position: relative;
-  display: grid;
-  width: 100%;
-  grid-template-columns: 45% 50%;
-  min-height: 80vh;
-  align-items: center;
-  gap: 5%;
-`;
-export const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
+  width: 100%;
+  min-height: 80vh;
   gap: 20px;
+  margin-top: 20px;
+`;
+export const Wrapper = styled.div`
+  width: 100%;
+  display: grid;
+  grid-template-columns: 45% 50%;
+  gap: 5%;
+`;
+
+export const DescriptionWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 `;
 
 export const RecipeDetails = styled.div`
