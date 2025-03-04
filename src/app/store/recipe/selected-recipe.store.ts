@@ -3,62 +3,64 @@ import { MealsResponse, Meal, GetMealDetailsRequest, MealData } from "app/store/
 import { AxiosResponse } from "axios";
 import { transformMealData } from "app/store/recipe/recipe.utils.ts";
 
-export type RecipeDetailsFetchMethod<T> = (params: GetMealDetailsRequest) => Promise<
+export type SelectedRecipeFetchMethod<T> = (params: GetMealDetailsRequest) => Promise<
   AxiosResponse<MealsResponse<T>, any> & {
     message?: string | undefined;
   }
 >;
 
-export class RecipeDetailsStore<T extends Meal> {
+export class SelectedRecipeStore<T extends Meal> {
   private meals: MealData[] | null;
-  private mealId?: string | null;
+  private selectedRecipeIds: string[];
   public isLoading: boolean;
   public isDataReady: boolean;
 
-  private readonly recipeDetailsRequest: RecipeDetailsFetchMethod<T>;
+  private readonly selectedRecipeRequest: SelectedRecipeFetchMethod<T>;
 
-  constructor(fetchMethod: RecipeDetailsFetchMethod<T>, params?: GetMealDetailsRequest) {
+  constructor(fetchMethod: SelectedRecipeFetchMethod<T>, selectedRecipeIds: string[]) {
     makeAutoObservable(this, undefined, { autoBind: true });
-    this.recipeDetailsRequest = fetchMethod;
+    this.selectedRecipeRequest = fetchMethod;
 
-    this.mealId = params?.mealId || null;
+    this.selectedRecipeIds = selectedRecipeIds;
     this.meals = null;
     this.isLoading = false;
     this.isDataReady = false;
   }
 
-  get recipeDetails() {
+  get recipes() {
     if (!this.isDataReady && this.meals === null && !this.isLoading) {
-      this.getMealDetails();
-      return undefined;
+      this.getMeals();
+      return [];
     }
 
-    return this.meals?.[0];
+    return this.meals;
   }
 
-  setDetailsId(mealId?: string | null) {
-    this.mealId = mealId;
+  setDetailsIds(mealIds: string[]) {
+    this.selectedRecipeIds = mealIds;
   }
 
   setMealsData(meals: T[]) {
     this.meals = meals.map((meal) => transformMealData(meal));
   }
 
-  async getMealDetails(mealId?: string) {
+  async getMeals(mealIds?: string[]) {
     try {
       this.isLoading = true;
 
-      const detailsId = mealId || this.mealId;
+      const detailsIds = mealIds || this.selectedRecipeIds;
 
-      if (!detailsId) {
+      if (!detailsIds?.length) {
         this.isLoading = false;
         return;
       }
 
-      const { data } = await this.recipeDetailsRequest({ mealId: detailsId });
+      const responses = await Promise.all(detailsIds.map((id) => this.selectedRecipeRequest({ mealId: id })));
+
+      const data = responses.map((res) => res.data.meals?.[0]).filter(Boolean);
 
       if (data) {
-        this.setMealsData(data.meals);
+        this.setMealsData(data);
         this.isDataReady = true;
       }
 

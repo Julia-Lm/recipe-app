@@ -4,11 +4,14 @@ import * as S from "./filter-recipe-panel.styles.ts";
 import { Select, TextField, MenuItem, SelectChangeEvent } from "@mui/material";
 import debounce from "lodash.debounce";
 import { ChangeEvent, useCallback, useState } from "react";
+import { SearchParamsNames } from "app/store/recipe/recipe.type.ts";
 
 export const FilterRecipePanel = ({ searchMeals, setPage, categoryNames }: FilterRecipePanelProp) => {
   const [searchParams, setSearchParams] = useSearchParams();
-  const [searchQuery, setSearchQuery] = useState<string>(searchParams.get("searchQuery") || "");
-  const [category, setCategory] = useState<string>(searchParams.get("category") || "");
+  const [searchQuery, setSearchQuery] = useState<string>(
+    searchParams.get(SearchParamsNames.searchQuery) || "",
+  );
+  const [category, setCategory] = useState<string>(searchParams.get(SearchParamsNames.category) || "");
 
   const debouncedUpdateParams = useCallback(
     debounce((newFilters) => {
@@ -19,16 +22,18 @@ export const FilterRecipePanel = ({ searchMeals, setPage, categoryNames }: Filte
 
   const handleChangeSearchQuery = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const newSearchQuery = e.target.value;
+
     setSearchQuery(newSearchQuery);
-    updateSearchParams("searchQuery", newSearchQuery);
+    updateSearchParams(SearchParamsNames.searchQuery, newSearchQuery);
     setPage(1);
     debouncedUpdateParams(newSearchQuery);
   };
 
   const handleChangeCategory = (e: SelectChangeEvent) => {
     const newCategory = e.target.value;
+
+    updateSearchParams(SearchParamsNames.category, newCategory);
     setPage(1);
-    updateSearchParams("category", newCategory);
     setCategory(newCategory);
   };
 

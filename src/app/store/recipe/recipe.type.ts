@@ -78,6 +78,7 @@ export const CountryCodes: Record<string, string> = {
   Ukrainian: "ua",
   Polish: "pl",
   Portuguese: "pt",
+  Uruguayan: "uy",
 };
 
 export interface GetMealDetailsRequest {
@@ -93,4 +94,9 @@ export interface MealCategoriesData {
   strCategory: string;
   strCategoryDescription: string;
   strCategoryThumb: string;
+}
+
+export enum SearchParamsNames {
+  searchQuery = "searchQuery",
+  category = "category",
 }

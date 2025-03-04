@@ -9,22 +9,36 @@ import { ROUTES } from "routes/routes.constant.ts";
 import { FilterRecipePanel } from "pages/recipe-home/ui";
 import { useEffect, useMemo } from "react";
 import { toFormatSearchParams } from "shared/utils/toFormatSearchParams.ts";
+import { SearchParamsNames } from "app/store/recipe/recipe.type.ts";
 
 export const RecipeHome = observer(() => {
   const [searchParams] = useSearchParams();
-  const { recipes, isLoading, searchMeals, page, itemsPerPage, setPage, categories } = RecipeHub;
+  const {
+    recipes,
+    isLoading,
+    searchMeals,
+    page,
+    itemsPerPage,
+    setPage,
+    categories,
+    selectedRecipes,
+    toggleSelectRecipe,
+  } = RecipeHub;
 
   const categoryNames = useMemo(() => categories.map((category) => category.strCategory), [categories]);
 
   const navigate = useNavigate();
   const goToRecipeDetails = (recipeId: string) => {
     navigate(`${ROUTES.recipeDetails.key}/${recipeId}`, {
-      state: { searchQuery: searchParams.get("searchQuery"), category: searchParams.get("category") || "" },
+      state: {
+        searchQuery: searchParams.get(SearchParamsNames.searchQuery) || "",
+        category: searchParams.get(SearchParamsNames.category) || "",
+      },
     });
   };
 
   const filterRecipes = useMemo(() => {
-    const category = searchParams.get("category") || "";
+    const category = searchParams.get(SearchParamsNames.category) || "";
     return category
       ? recipes?.filter((recipe) => recipe.strCategory.toLowerCase().includes(category.toLowerCase()))
       : recipes;
@@ -44,6 +58,8 @@ export const RecipeHome = observer(() => {
     searchMeals(updatedSearchQuery);
   }, []);
 
+  const onToggleSelectRecipe = (id: string) => () => toggleSelectRecipe(id);
+
   return (
     <ErrorBoundaryComponent>
       <FilterRecipePanel searchMeals={searchMeals} setPage={setPage} categoryNames={categoryNames} />
@@ -57,6 +73,8 @@ export const RecipeHome = observer(() => {
                 category={strCategory}
                 image={strMealThumb}
                 country={strArea}
+                isSelected={selectedRecipes.includes(idMeal)}
+                onSelectCard={onToggleSelectRecipe(idMeal)}
                 onClickCard={() => goToRecipeDetails(idMeal)}
               />
             ))}

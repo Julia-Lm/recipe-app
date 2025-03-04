@@ -11,6 +11,7 @@ export const CardWrapper = styled.div`
   border-radius: 10px;
   overflow: hidden;
   cursor: pointer;
+  position: relative;
 `;
 
 export const CardContent = styled.div`
@@ -44,4 +45,24 @@ export const CardImg = styled.img`
   object-fit: cover;
   object-position: center;
   margin-bottom: auto;
+`;
+
+export const StarIconWrapper = styled("div")<{ $isSelected: boolean }>`
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  width: 20px;
+  height: 20px;
+  z-index: 5;
+  cursor: pointer;
+
+  & svg {
+    width: 100%;
+    height: 100%;
+
+    & path {
+      fill: ${({ $isSelected }) => ($isSelected ? "orange" : "white")};
+      stroke: #000;
+    }
+  }
 `;

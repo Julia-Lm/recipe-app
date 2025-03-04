@@ -2,18 +2,18 @@ import { MealData, Meal } from "app/store/recipe/recipe.type.ts";
 
 export const transformMealData = (meal: Meal): MealData => {
   const ingredients = Object.keys(meal)
-      .filter((key) => key.startsWith("strIngredient") && meal[key]?.trim())
-      .reduce<{ ingredient: string; measure: string }[]>((acc, key) => {
-        const index = key.replace("strIngredient", "");
-        const ingredient = meal[key]?.trim();
-        const measure = meal[`strMeasure${index}`]?.trim() || "";
+    .filter((key) => key.startsWith("strIngredient") && meal[key]?.trim())
+    .reduce<{ ingredient: string; measure: string }[]>((acc, key) => {
+      const index = key.replace("strIngredient", "");
+      const ingredient = meal[key]?.trim();
+      const measure = meal[`strMeasure${index}`]?.trim() || "";
 
-        if (ingredient) {
-          acc.push({ ingredient, measure });
-        }
+      if (ingredient) {
+        acc.push({ ingredient, measure });
+      }
 
-        return acc;
-      }, []);
+      return acc;
+    }, []);
 
   return {
     idMeal: meal.idMeal,
