@@ -1,5 +1,6 @@
 import { Pagination as MUIPagination } from "@mui/material";
 import { useMemo } from "react";
+import { PaginationProps } from "entities/pagination/pagination.type.ts";
 
 export const Pagination = ({ page, totalLength, itemsPerPage, onPageChange }: PaginationProps) => {
   const totalPages = useMemo(() => {

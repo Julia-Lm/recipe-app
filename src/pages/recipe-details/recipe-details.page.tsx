@@ -45,8 +45,8 @@ export const RecipeDetails = observer(() => {
                 <div>
                   <S.Subtitle>Ingredients</S.Subtitle>
 
-                  {recipeDetails.ingredients.map(({ ingredient, measure }) => (
-                    <div key={ingredient}>{`${ingredient} - ${measure}`}</div>
+                  {recipeDetails.ingredients.map(({ ingredient, measure }, index) => (
+                    <div key={`${ingredient}${index}`}>{`${ingredient} - ${measure}`}</div>
                   ))}
                 </div>
               </S.DescriptionWrapper>

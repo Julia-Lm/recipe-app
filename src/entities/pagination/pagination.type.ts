@@ -1,4 +1,4 @@
-interface PaginationProps {
+export interface PaginationProps {
   page: number;
   totalLength: number;
   itemsPerPage: number;

@@ -57,7 +57,7 @@ export const SelectedRecipes = observer(() => {
             <S.TotalIngredientList>
               <S.TotalIngredientTitle>Total Ingredients</S.TotalIngredientTitle>
               {mergeMealsIngredients.map(({ ingredient, measure }, index) => (
-                <S.TotalIngredientItem key={`ingredient${index}`}>
+                <S.TotalIngredientItem key={`${ingredient}${index}`}>
                   {ingredient} - {measure}
                 </S.TotalIngredientItem>
               ))}
