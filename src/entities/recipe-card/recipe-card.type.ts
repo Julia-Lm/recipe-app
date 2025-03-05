@@ -3,5 +3,7 @@ export interface RecipeCardProp {
   name: string;
   category: string;
   country: string;
-  onClickCard: () => void;
+  isSelected: boolean;
+  onClickCard?: () => void;
+  onSelectCard?: () => void;
 }

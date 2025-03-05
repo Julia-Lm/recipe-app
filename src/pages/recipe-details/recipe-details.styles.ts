@@ -1,19 +1,25 @@
 import styled from "styled-components";
-import { Link } from "react-router-dom";
 
 export const Container = styled.div`
   position: relative;
-  display: grid;
-  width: 100%;
-  grid-template-columns: 45% 50%;
-  min-height: 80vh;
-  align-items: center;
-  gap: 5%;
-`;
-export const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
+  width: 100%;
+  min-height: 80vh;
   gap: 20px;
+  margin-top: 20px;
+`;
+export const Wrapper = styled.div`
+  width: 100%;
+  display: grid;
+  grid-template-columns: 45% 50%;
+  gap: 5%;
+`;
+
+export const DescriptionWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 `;
 
 export const RecipeDetails = styled.div`
@@ -51,15 +57,4 @@ export const NoData = styled.div`
   align-items: center;
   justify-content: center;
   grid-column: 1/3;
-`;
-
-export const BackLink = styled(Link)`
-  font-weight: 600;
-  color: ${({ theme }) => theme.header.link.color};
-  margin-bottom: 5px;
-  width: fit-content;
-
-  &:hover {
-    opacity: 0.7;
-  }
 `;
